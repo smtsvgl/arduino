@@ -1,0 +1,29 @@
+int kirmizi = 3;  // Kırmızı LED için pin 3 atanır
+int yesil = 5;    // Yeşil LED için pin 5 atanır
+int mavi = 6;     // Mavi LED için pin 6 atanır
+
+void setup() {
+  pinMode(kirmizi, OUTPUT);  // Kırmızı pin çıkış olarak ayarlanır
+  pinMode(yesil, OUTPUT);    // Yeşil pin çıkış olarak ayarlanır
+  pinMode(mavi, OUTPUT);     // Mavi pin çıkış olarak ayarlanır
+}
+
+void loop() {
+  // Kırmızı LED'i tam parlaklıkta yak, diğerlerini söndür
+  analogWrite(kirmizi, 255); // Kırmızı LED'i tam parlaklıkta yak
+  analogWrite(yesil, 0);     // Yeşil LED'i söndür
+  analogWrite(mavi, 0);      // Mavi LED'i söndür
+  delay(1000);               // 1 saniye bekle
+
+  // Yeşil LED'i tam parlaklıkta yak, diğerlerini söndür
+  analogWrite(kirmizi, 0);   // Kırmızı LED'i söndür
+  analogWrite(yesil, 255);   // Yeşil LED'i tam parlaklıkta yak
+  analogWrite(mavi, 0);      // Mavi LED'i söndür
+  delay(1000);               // 1 saniye bekle
+
+  // Mavi LED'i tam parlaklıkta yak, diğerlerini söndür
+  analogWrite(kirmizi, 0);   // Kırmızı LED'i söndür
+  analogWrite(yesil, 0);     // Yeşil LED'i söndür
+  analogWrite(mavi, 255);    // Mavi LED'i tam parlaklıkta yak
+  delay(1000);               // 1 saniye bekle
+}
