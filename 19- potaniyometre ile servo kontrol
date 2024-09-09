@@ -1,0 +1,24 @@
+// Servo motor pin bağlantısı
+const int servoPin = 10;  // Servo motorun bağlı olduğu pin numarası
+
+// Potansiyometre pin bağlantısı
+const int potPin = A6;  // Potansiyometrenin bağlı olduğu analog pin numarası
+
+void setup() {
+  // Servo motor pinini ayarla
+  pinMode(servoPin, OUTPUT);  // Servo motorun bağlı olduğu pin'i çıkış olarak ayarla
+}
+
+void loop() {
+  // Potansiyometre değerini oku (0-1023 arasında bir değer)
+  int potDegeri = analogRead(potPin);  // Potansiyometreden analog değeri oku
+
+  // Potansiyometre değerini 0-180 arasına ölçekle
+  int servoPozisyonu = map(potDegeri, 0, 1023, 0, 180);  // 0-1023 değer aralığını 0-180 aralığına dönüştür
+
+  // Servo motorun pozisyonunu ayarla
+  analogWrite(servoPin, servoPozisyonu);  // Servo motorun pozisyonunu ayarla
+
+  // Küçük bir gecikme ekle
+  delay(15);  // Servo motorun hareketlerini yumuşatmak için 15 ms gecikme uygula
+}
