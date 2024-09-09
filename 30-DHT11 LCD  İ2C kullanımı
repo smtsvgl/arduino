@@ -1,0 +1,56 @@
+// Kütüphaneler
+#include <DHT.h>
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+
+// I2C LCD
+LiquidCrystal_I2C lcd(0x27, 16, 2); // LCD adresi 0x27, 16x2 ekran
+
+// Sabitler
+#define DHTPIN A6    // DHT sensörünün bağlı olduğu pin
+#define DHTTYPE DHT11 // DHT sensörünün tipi
+
+DHT dht(DHTPIN, DHTTYPE); // DHT sensörünü başlat
+
+// Değişkenler
+int h; // Nem değerini depolar
+int t; // Sıcaklık değerini depolar
+
+void setup() {
+  Serial.begin(9600); // Seri port iletişimini başlat
+  Serial.println("Sıcaklık ve Nem Sensörü Testi");
+  
+  dht.begin(); // DHT sensörünü başlat
+
+  lcd.init(); // LCD ekranı başlat
+  lcd.backlight(); // LCD ekranın arka ışığını aç
+}
+
+void loop() {
+  // Verileri oku ve h (nem) ve t (sıcaklık) değişkenlerine kaydet
+  h = dht.readHumidity();
+  t = dht.readTemperature();
+
+  // Sıcaklık ve nem değerlerini seri monitöre yazdır
+  Serial.print("Nem: ");
+  Serial.print(h);
+  Serial.print(" %, Sıcaklık: ");
+  Serial.print(t);
+  Serial.println("°C");
+
+  // LCD ekranı güncelle
+  lcd.setCursor(0, 0); // İlk satırın başına git
+  lcd.print("Basit Devreler"); // İlk satıra yaz
+
+  lcd.setCursor(0, 1); // İkinci satırın başına git
+  lcd.print("T: ");
+  lcd.print(t); // Sıcaklık değerini yaz
+  lcd.print("C"); // C harfi ekle
+
+  lcd.setCursor(11, 1); // İkinci satırın 11. sütununa git
+  lcd.print("H: ");
+  lcd.print(h); // Nem değerini yaz
+  lcd.print("%"); // % işareti ekle
+
+  delay(1000); // 1 saniye bekle
+}
