@@ -1,0 +1,31 @@
+#include <Servo.h>  // Servo motor kütüphanesini ekle
+
+// Pin bağlantıları
+const int servoPin = 10;   // Servo motorun bağlı olduğu pin
+const int buttonPin = 9;   // Butonun bağlı olduğu pin
+
+Servo myservo;            // Servo motor nesnesi oluştur
+int servoAngle = 0;       // Servo motorun açısını saklamak için değişken
+int buttonState = 0;      // Butonun mevcut durumunu saklamak için değişken
+int lastButtonState = 0;  // Butonun önceki durumunu saklamak için değişken
+
+void setup() {
+  myservo.attach(servoPin);  // Servo motoru belirtilen pin'e bağla
+  pinMode(buttonPin, INPUT); // Buton pinini giriş olarak ayarla
+}
+
+void loop() {
+  buttonState = digitalRead(buttonPin); // Butonun mevcut durumunu oku
+
+  // Buton durumunda değişiklik varsa
+  if (buttonState != lastButtonState) {
+    // Butona basıldıysa
+    if (buttonState == HIGH) {
+      servoAngle = (servoAngle + 90) % 180;  // Her basışta 90 derece artır, 180 dereceyi geçme
+      myservo.write(servoAngle);             // Servo motoru belirtilen açıya ayarla
+    }
+    delay(50);  // Buton debouncing için gecikme
+  }
+
+  lastButtonState = buttonState; // Önceki buton durumunu güncelle
+}
