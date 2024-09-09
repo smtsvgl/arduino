@@ -1,0 +1,17 @@
+const int buttonPin = 9;  // Butonun bağlı olduğu dijital pin
+const int ledPin = 4;    // LED'in bağlı olduğu dijital pin
+
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);  // Buton pinini giriş olarak ayarla ve dahili pull-up direnç kullan
+  pinMode(ledPin, OUTPUT);           // LED pinini çıkış olarak ayarla
+}
+
+void loop() {
+  int buttonState = digitalRead(buttonPin);  // Butonun durumunu oku
+
+  if (buttonState == LOW) {   // Butona basıldığında
+    digitalWrite(ledPin, HIGH);  // LED'i yak
+  } else {                    // Butona basılmadığında
+    digitalWrite(ledPin, LOW);   // LED'i söndür
+  }
+}
