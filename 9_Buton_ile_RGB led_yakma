@@ -1,0 +1,31 @@
+int RGB_ledkirmizi = 3;  // Kırmızı LED için pin 3 atanır
+int RGB_ledyesil = 5;    // Yeşil LED için pin 5 atanır
+int RGB_ledmavi = 6;     // Mavi LED için pin 6 atanır
+
+int buton = 9;           // Buton için pin 9 atanır
+
+int buton_durum;         // Butonun durumunu saklamak için değişken
+
+void setup() {
+  pinMode(RGB_ledkirmizi, OUTPUT);  // Kırmızı LED pinini çıkış olarak ayarla
+  pinMode(RGB_ledyesil, OUTPUT);    // Yeşil LED pinini çıkış olarak ayarla
+  pinMode(RGB_ledmavi, OUTPUT);     // Mavi LED pinini çıkış olarak ayarla
+  pinMode(buton, INPUT);            // Buton pinini giriş olarak ayarla
+}
+
+void loop() {
+  buton_durum = digitalRead(buton);  // Butonun durumunu oku
+
+  /* Butona basılmışsa tüm LED'leri tam parlaklıkta yak */
+  if (buton_durum == 1) {
+    analogWrite(RGB_ledkirmizi, 255);  // Kırmızı LED'i tam parlaklıkta yak
+    analogWrite(RGB_ledyesil, 255);    // Yeşil LED'i tam parlaklıkta yak
+    analogWrite(RGB_ledmavi, 255);     // Mavi LED'i tam parlaklıkta yak
+  }
+  /* Butona basılmamışsa tüm LED'leri söndür */
+  else {
+    analogWrite(RGB_ledkirmizi, 0);    // Kırmızı LED'i söndür
+    analogWrite(RGB_ledyesil, 0);      // Yeşil LED'i söndür
+    analogWrite(RGB_ledmavi, 0);       // Mavi LED'i söndür
+  }
+}
