@@ -1,0 +1,63 @@
+#include <Servo.h>  // Servo motor kütüphanesini ekle
+
+// Servo Motor 1: Yavaşça 0'dan 180'e ve tekrar 180'den 0'a döner
+Servo myservo1;
+int servoPin1 = 10;
+int derece;
+
+void setup()
+{
+  myservo1.attach(servoPin1);  // Servo motoru belirtilen pin'e bağla
+}
+
+void loop()
+{
+  // Servo motoru 0'dan 180'e kadar döndür
+  for (derece = 0; derece <= 180; derece += 1) 
+  {
+    myservo1.write(derece);  // Servo motoru belirtilen açıya ayarla
+    delay(15);  // 15 ms bekle
+  }
+  
+  // Servo motoru 180'den 0'a kadar döndür
+  for (derece = 180; derece >= 0; derece -= 1) 
+  {
+    myservo1.write(derece);  // Servo motoru belirtilen açıya ayarla
+    delay(15);  // 15 ms bekle
+  }
+}
+
+
+
+
+
+
+
+// Servo Motor 2: Belirtilen açılara sırasıyla döner
+#include <Servo.h>  // Servo motor kütüphanesini ekle
+
+Servo myservo2;
+int servoPin2 = 10;
+
+void setup()
+{
+  myservo2.attach(servoPin2);  // Servo motoru belirtilen pin'e bağla
+}
+
+void loop()
+{
+  myservo2.write(0);    // Servo motoru 0 dereceye ayarla
+  delay(1000);          // 1000 ms bekle
+  
+  myservo2.write(45);   // Servo motoru 45 dereceye ayarla
+  delay(1000);          // 1000 ms bekle
+  
+  myservo2.write(90);   // Servo motoru 90 dereceye ayarla
+  delay(1000);          // 1000 ms bekle
+  
+  myservo2.write(120);  // Servo motoru 120 dereceye ayarla
+  delay(1000);          // 1000 ms bekle
+  
+  myservo2.write(180);  // Servo motoru 180 dereceye ayarla
+  delay(1000);          // 1000 ms bekle
+}
