@@ -1,0 +1,122 @@
+// Motor Pinlerimiz
+int motora1 = 3;  // Motor A'nın ilk pin numarası
+int motora2 = 5;  // Motor A'nın ikinci pin numarası
+int motorb1 = 6;  // Motor B'nin ilk pin numarası
+int motorb2 = 9;  // Motor B'nin ikinci pin numarası
+
+// Düğme Pin'i
+int buttonPin = 9;  // Düğme pini (bu pin motorb2 ile aynı)
+
+bool motorDurumu = false;  // Motorun durumu (açık/kapat)
+bool oncekiDugmeDurumu = false;  // Önceki düğme durumu
+
+void setup() {
+  // Pin modlarını tanımladık.
+  pinMode(motora1, OUTPUT);  // Motor A'nın ilk pini çıkış olarak ayarlandı
+  pinMode(motora2, OUTPUT);  // Motor A'nın ikinci pini çıkış olarak ayarlandı
+  pinMode(motorb1, OUTPUT);  // Motor B'nin ilk pini çıkış olarak ayarlandı
+  pinMode(motorb2, OUTPUT);  // Motor B'nin ikinci pini çıkış olarak ayarlandı
+  
+  // Düğme pin'ini giriş olarak ayarla ve pull-up direnci etkinleştir
+  pinMode(buttonPin, INPUT_PULLUP);
+}
+
+void loop() {
+  // Düğme durumunu kontrol et
+  int buttonState = digitalRead(buttonPin);
+
+  // Düğme basıldığında ve önceki durumu basılı değilse motor durumunu tersine çevir
+  if (buttonState == LOW && !oncekiDugmeDurumu) {
+    motorDurumu = !motorDurumu;  // Motor durumunu tersine çevir
+    oncekiDugmeDurumu = true;    // Önceki durumu güncelle
+  }
+  // Düğme serbest bırakıldığında, önceki durumu güncelle
+  else if (buttonState == HIGH) {
+    oncekiDugmeDurumu = false;
+  }
+
+  // Motoru aç veya kapat
+  if (motorDurumu) {
+    motorkontrol(250, 250);  // Motoru ileriye sür
+  } else {
+    motorkontrol(0, 0);  // Motoru durdur
+  }
+}
+
+// Motor kontrol fonksiyonumuz
+void motorkontrol(int x, int y) {
+  if (x >= 0) {
+    analogWrite(motora1, x);  // Motor A'nın ileri yönde hareketini kontrol et
+    analogWrite(motora2, 0);  // Motor A'nın geri yönde hareketini kapat
+  } else {
+    analogWrite(motora1, 0);  // Motor A'nın ileri yönde hareketini kapat
+    analogWrite(motora2, -x);  // Motor A'nın geri yönde hareketini kontrol et
+  }
+  
+  if (y >= 0) {
+    analogWrite(motorb1, y);  // Motor B'nin ileri yönde hareketini kontrol et
+    analogWrite(motorb2, 0);  // Motor B'nin geri yönde hareketini kapat
+  } else {
+    analogWrite(motorb1, 0);  // Motor B'nin ileri yönde hareketini kapat
+    analogWrite(motorb2, -y);  // Motor B'nin geri yönde hareketini kontrol et
+  }
+}
+
+
+
+
+2 ci kod ;
+
+
+
+// Motor Pinlerimiz
+int motora1 = 3;  // Motor A'nın ilk pin numarası
+int motora2 = 5;  // Motor A'nın ikinci pin numarası
+
+// Düğme Pin'i
+int buttonPin = 9;  // Düğme pini (Motor B'nin ikinci pin numarasıyla aynı)
+
+bool motorDurumu = false;  // Motorun durumu (açık/kapat)
+bool oncekiDugmeDurumu = false;  // Önceki düğme durumu
+
+void setup() {
+  // Pin modlarını tanımladık.
+  pinMode(motora1, OUTPUT);  // Motor A'nın ilk pini çıkış olarak ayarlandı
+  pinMode(motora2, OUTPUT);  // Motor A'nın ikinci pini çıkış olarak ayarlandı
+  
+  // Düğme pin'ini giriş olarak ayarla ve pull-up direnci etkinleştir
+  pinMode(buttonPin, INPUT_PULLUP);
+}
+
+void loop() {
+  // Düğme durumunu kontrol et
+  int buttonState = digitalRead(buttonPin);
+
+  // Düğme basıldığında ve önceki durumu basılı değilse motor durumunu tersine çevir
+  if (buttonState == LOW && !oncekiDugmeDurumu) {
+    motorDurumu = !motorDurumu;  // Motor durumunu tersine çevir
+    oncekiDugmeDurumu = true;    // Önceki durumu güncelle
+  }
+  // Düğme serbest bırakıldığında, önceki durumu güncelle
+  else if (buttonState == HIGH) {
+    oncekiDugmeDurumu = false;
+  }
+
+  // Motoru aç veya kapat
+  if (motorDurumu) {
+    motorkontrol(250);  // Motor A'yı ileriye sür
+  } else {
+    motorkontrol(0);  // Motor A'yı durdur
+  }
+}
+
+// Motor kontrol fonksiyonumuz
+void motorkontrol(int x) {
+  if (x >= 0) {
+    analogWrite(motora1, x);  // Motor A'nın ileri yönde hareketini kontrol et
+    analogWrite(motora2, 0);  // Motor A'nın geri yönde hareketini kapat
+  } else {
+    analogWrite(motora1, 0);  // Motor A'nın ileri yönde hareketini kapat
+    analogWrite(motora2, -x);  // Motor A'nın geri yönde hareketini kontrol et
+  }
+}
