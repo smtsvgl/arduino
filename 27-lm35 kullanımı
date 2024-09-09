@@ -1,0 +1,33 @@
+// LM35 sıcaklık sensörü derece başına 10 mV çıkış verir.    
+// 1000 mV = 1 V
+
+const int analogPin = A6;  // Sıcaklık sensörünün bağlı olduğu analog pin
+float gerilimDeger = 0;    // Gerilim değeri (mV cinsinden)
+float sensorDeger = 0;     // Sensörden okunan ham değer
+float sicaklikDeger = 0;   // Hesaplanan sıcaklık değeri (°C cinsinden)
+
+void setup() {
+  Serial.begin(9600);  // Seri port ekranını 9600 baud hızında başlat
+}
+
+void loop() {
+  sensorDeger = analogRead(analogPin);  // A0 pinindeki değeri oku
+
+  Serial.print("Sensör Değeri:  ");
+  Serial.println(sensorDeger);  // Sensör değerini seri monitöre yazdır
+
+  // Analog değeri mV cinsinden gerilim değerine dönüştür
+  gerilimDeger = (sensorDeger / 1023.0) * 5000.0; 
+
+  Serial.print("Gerilim Değeri: ");
+  Serial.println(gerilimDeger);  // Gerilim değerini seri monitöre yazdır
+  
+  // Gerilim değerini sıcaklık değerine dönüştür
+  sicaklikDeger = gerilimDeger / 10.0;
+
+  Serial.print("Sıcaklık Değeri: ");
+  Serial.println(sicaklikDeger);  // Sıcaklık değerini seri monitöre yazdır
+
+  Serial.println("**********************************");
+  delay(1000);  // Her döngüde bir saniye bekle
+}
