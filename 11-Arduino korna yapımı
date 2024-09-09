@@ -1,0 +1,20 @@
+int korna = 2;    // Korna için pin 2 atanır
+int buton = 9;    // Buton için pin 9 atanır
+
+int butondurum;   // Butonun durumunu saklamak için değişken
+
+void setup() {
+  pinMode(korna, OUTPUT);  // Korna pinini çıkış olarak ayarla
+  pinMode(buton, INPUT);   // Buton pinini giriş olarak ayarla
+}
+
+void loop() {
+  butondurum = digitalRead(buton);  // Butonun durumunu oku
+
+  /* Butona basılmışsa korna çal (HIGH), basılmamışsa korna çalma (LOW) */
+  if (butondurum == HIGH) {
+    digitalWrite(korna, HIGH);  // Korna çal
+  } else {
+    digitalWrite(korna, LOW);   // Korna çalma
+  }
+}
