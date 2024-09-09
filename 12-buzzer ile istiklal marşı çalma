@@ -1,0 +1,191 @@
+// Türkiye Cumhuriyeti İstiklal Marşı
+
+const int buzzer = 2;  // Buzzer pin'ine bağlı
+
+// Kullanılacak notaların frekans değerleri
+int c = 523;   // do
+int cd = 554;  // do diyez
+int d = 587;   // re
+int dd = 622;  // re diyez
+int e = 659;   // mi
+int f = 698;   // fa
+int fd = 740;  // fa diyez
+int g = 784;   // sol
+int gd = 830;  // sol diyez
+int a = 440;   // la
+int ad = 466;  // la diyez
+int b = 494;   // si
+int a2 = 880;  // la (bir üst oktav)
+int ad2 = 932; // la diyez (bir üst oktav)
+int b2 = 988;  // si (bir üst oktav)
+int c2 = 1046; // do (bir üst oktav)
+int cd2 = 1108;// do diyez (bir üst oktav)
+int d2 = 1174; // re (bir üst oktav)
+int dd2 = 1244;// re diyez (bir üst oktav)
+int e2 = 1318; // mi (bir üst oktav)
+int f2 = 1396; // fa (bir üst oktav)
+int fd2 = 1480;// fa diyez (bir üst oktav)
+int g2 = 1568; // sol (bir üst oktav)
+int gd2 = 1660;// sol diyez (bir üst oktav)
+int a3 = 1760; // la (iki üst oktav)
+
+void setup() {
+  Serial.begin(9600);  // Seri haberleşmeyi başlat
+  pinMode(buzzer, OUTPUT);  // Buzzer pin'ini çıkış olarak ayarla
+}
+
+void loop() {
+  // İstiklal Marşı'nın melodisini çal
+
+  // "Korkma, sönmez bu şafak" bölümü
+  tone(buzzer, c);   delay(800);  // do
+  tone(buzzer, f);   delay(800);  // fa
+  tone(buzzer, g);   delay(800);  // sol
+  tone(buzzer, gd);  delay(800);  // sol diyez
+  tone(buzzer, e);   delay(400);  // mi
+  tone(buzzer, g);   delay(200);  // sol
+  tone(buzzer, f);   delay(1600); // fa
+  noTone(buzzer);    delay(300);  // Buzzer'ı kapat
+
+  // "Yüzden al sancak" bölümü
+  tone(buzzer, f);   delay(800);  // fa
+  tone(buzzer, ad2); delay(800);  // la diyez (bir üst oktav)
+  tone(buzzer, c2);  delay(800);  // do (bir üst oktav)
+  tone(buzzer, cd2); delay(800);  // do diyez (bir üst oktav)
+  tone(buzzer, a2);  delay(400);  // la (bir üst oktav)
+  tone(buzzer, c2);  delay(200);  // do (bir üst oktav)
+  tone(buzzer, ad2); delay(1600); // la diyez (bir üst oktav)
+
+  // "Sönmeden yurdumun üstünde" bölümü
+  tone(buzzer, c2);  delay(200);  // do (bir üst oktav)
+  tone(buzzer, ad2); delay(200);  // la diyez (bir üst oktav)
+  tone(buzzer, c2);  delay(200);  // do (bir üst oktav)
+  tone(buzzer, g);   delay(400);  // sol
+  noTone(buzzer);    delay(100);  // Buzzer'ı kapat
+  tone(buzzer, g);   delay(400);  // sol
+  tone(buzzer, ad);  delay(200);  // la diyez
+  tone(buzzer, gd);  delay(400);  // sol diyez
+  tone(buzzer, e);   delay(200);  // mi
+  tone(buzzer, f);   delay(400);  // fa
+  tone(buzzer, g);   delay(200);  // sol
+  tone(buzzer, gd);  delay(400);  // sol diyez
+  tone(buzzer, ad);  delay(200);  // la diyez
+  tone(buzzer, c2);  delay(400);  // do (bir üst oktav)
+  tone(buzzer, cd2); delay(200);  // do diyez (bir üst oktav)
+  tone(buzzer, dd2); delay(400);  // re diyez (bir üst oktav)
+  tone(buzzer, f2);  delay(200);  // fa (bir üst oktav)
+  tone(buzzer, dd2); delay(400);  // re diyez (bir üst oktav)
+
+  // "Nim milletimin" bölümü
+  tone(buzzer, dd);  delay(200);  // re diyez
+  tone(buzzer, d);   delay(200);  // re
+  tone(buzzer, dd);  delay(200);  // re diyez
+  tone(buzzer, c2);  delay(800);  // do (bir üst oktav)
+  tone(buzzer, ad);  delay(800);  // la diyez
+  tone(buzzer, gd);  delay(1600); // sol diyez
+
+  // "Yıldızıdır parlayacak" bölümü
+  tone(buzzer, c);   delay(200);  // do
+  tone(buzzer, b);   delay(200);  // si
+  tone(buzzer, c);   delay(200);  // do
+  tone(buzzer, g);   delay(800);  // sol
+  tone(buzzer, c);   delay(800);  // do
+  tone(buzzer, c2);  delay(800);  // do (bir üst oktav)
+  tone(buzzer, ad);  delay(200);  // la diyez
+  tone(buzzer, gd);  delay(200);  // sol diyez
+  tone(buzzer, g);   delay(400);  // sol
+  tone(buzzer, gd);  delay(200);  // sol diyez
+  tone(buzzer, f);   delay(800);  // fa
+
+  // "Dir, o benim milletimindir ancak" bölümü
+  tone(buzzer, f2);  delay(800);  // fa (bir üst oktav)
+  tone(buzzer, dd2); delay(200);  // re diyez (bir üst oktav)
+  tone(buzzer, cd2); delay(400);  // do diyez (bir üst oktav)
+  tone(buzzer, c2);  delay(200);  // do (bir üst oktav)
+  tone(buzzer, ad);  delay(400);  // la diyez
+  tone(buzzer, gd);  delay(200);  // sol diyez
+  tone(buzzer, g);   delay(400);  // sol
+  tone(buzzer, f);   delay(200);  // fa
+  tone(buzzer, c2);  delay(400);  // do (bir üst oktav)
+  tone(buzzer, c);   delay(800);  // do
+  tone(buzzer, f);   delay(1600); // fa
+
+  // İkinci kıta
+
+  // "Çatma, kurban olayım" bölümü
+  tone(buzzer, c);   delay(800);  // do
+  tone(buzzer, f);   delay(800);  // fa
+  tone(buzzer, g);   delay(800);  // sol
+  tone(buzzer, gd);  delay(800);  // sol diyez
+  tone(buzzer, e);   delay(400);  // mi
+  tone(buzzer, g);   delay(200);  // sol
+  tone(buzzer, f);   delay(1600); // fa
+  noTone(buzzer);    delay(300);  // Buzzer'ı kapat
+
+  // "Çehreni ey nazlı hilal" bölümü
+  tone(buzzer, f);   delay(800);  // fa
+  tone(buzzer, ad2); delay(800);  // la diyez (bir üst oktav)
+  tone(buzzer, c2);  delay(800);  // do (bir üst oktav)
+  tone(buzzer, cd2); delay(400);  // do diyez (bir üst oktav)
+  tone(buzzer, ad2); delay(400);  // la diyez (bir üst oktav)
+  tone(buzzer, a2);  delay(400);  // la (bir üst oktav)
+  tone(buzzer, c2);  delay(400);  // do (bir üst oktav)
+  tone(buzzer, ad2); delay(800);  // la diyez (bir üst oktav)
+
+  // "Kahraman ırkıma bir gül ne bu şiddet bu celal sana" bölümü
+  tone(buzzer, c2);  delay(200);  // do (bir üst oktav)
+  tone(buzzer, ad2); delay(200);  // la diyez (bir üst oktav)
+  tone(buzzer, c2);  delay(200);  // do (bir üst oktav)
+  tone(buzzer, g);   delay(400);  // sol
+  noTone(buzzer);    delay(100);  // Buzzer'ı kapat
+  tone(buzzer, g);   delay(400);  // sol
+  tone(buzzer, ad);  delay(200);  // la diyez
+  tone(buzzer, gd);  delay(400);  // sol diyez
+  tone(buzzer, e);   delay(200);  // mi
+  tone(buzzer, f);   delay(400);  // fa
+  tone(buzzer, g);   delay(200);  // sol
+  tone(buzzer, gd);  delay(400);  // sol diyez
+  tone(buzzer, ad);  delay(200);  // la diyez
+  tone(buzzer, c2);  delay(400);  // do (bir üst oktav)
+  tone(buzzer, cd2); delay(200);  // do diyez (bir üst oktav)
+  tone(buzzer, dd2); delay(400);  // re diyez (bir üst oktav)
+  tone(buzzer, f2);  delay(200);  // fa (bir üst oktav)
+  tone(buzzer, dd2); delay(400);  // re diyez (bir üst oktav)
+
+  // "Olmaz dökülen" bölümü
+  tone(buzzer, dd);  delay(200);  // re diyez
+  tone(buzzer, d);   delay(200);  // re
+  tone(buzzer, dd);  delay(200);  // re diyez
+  tone(buzzer, c2);  delay(800);  // do (bir üst oktav)
+  tone(buzzer, ad);  delay(800);  // la diyez
+  tone(buzzer, gd);  delay(1600); // sol diyez
+
+  // "Kanlarımız sonra helal haktır" bölümü
+  tone(buzzer, c);   delay(200);  // do
+  tone(buzzer, b);   delay(200);  // si
+  tone(buzzer, c);   delay(200);  // do
+  tone(buzzer, g);   delay(800);  // sol
+  tone(buzzer, c);   delay(800);  // do
+  tone(buzzer, c2);  delay(800);  // do (bir üst oktav)
+  tone(buzzer, ad);  delay(200);  // la diyez
+  tone(buzzer, gd);  delay(200);  // sol diyez
+  tone(buzzer, g);   delay(400);  // sol
+  tone(buzzer, gd);  delay(200);  // sol diyez
+  tone(buzzer, f);   delay(800);  // fa
+
+  // "Hakk'a tapan milletimin istiklal" bölümü
+  tone(buzzer, f2);  delay(800);  // fa (bir üst oktav)
+  tone(buzzer, dd2); delay(200);  // re diyez (bir üst oktav)
+  tone(buzzer, cd2); delay(400);  // do diyez (bir üst oktav)
+  tone(buzzer, c2);  delay(200);  // do (bir üst oktav)
+  tone(buzzer, ad);  delay(400);  // la diyez
+  tone(buzzer, gd);  delay(200);  // sol diyez
+  tone(buzzer, g);   delay(400);  // sol
+  tone(buzzer, f);   delay(200);  // fa
+  tone(buzzer, c2);  delay(400);  // do (bir üst oktav)
+  tone(buzzer, c);   delay(800);  // do
+  tone(buzzer, f);   delay(1600); // fa
+
+  noTone(buzzer);    // Buzzer'ı kapat
+  delay(300);        // 0.3 saniye bekle
+}
