@@ -1,0 +1,25 @@
+int kirmiziled = 3;  // Kırmızı LED için pin 3 atanır
+int yesilled = 5;    // Yeşil LED için pin 5 atanır
+int maviled = 6;     // Mavi LED için pin 6 atanır
+
+int kirmizi_random;  // Kırmızı LED için rastgele değer saklanacak değişken
+int yesil_random;    // Yeşil LED için rastgele değer saklanacak değişken
+int mavi_random;     // Mavi LED için rastgele değer saklanacak değişken
+
+void setup() {
+  pinMode(kirmiziled, OUTPUT);  // Kırmızı pin çıkış olarak ayarlanır
+  pinMode(yesilled, OUTPUT);    // Yeşil pin çıkış olarak ayarlanır
+  pinMode(maviled, OUTPUT);     // Mavi pin çıkış olarak ayarlanır
+}
+
+void loop() {
+  // Her LED için rastgele bir parlaklık değeri (0-255 arası) oluştur
+  kirmizi_random = random(0, 256);
+  yesil_random = random(0, 256);
+  mavi_random = random(0, 256);
+
+  // LED'lere rastgele parlaklık değerlerini uygula
+  analogWrite(kirmiziled, kirmizi_random); // Kırmızı LED'e rastgele parlaklık uygula
+  analogWrite(yesilled, yesil_random);     // Yeşil LED'e rastgele parlaklık uygula
+  analogWrite(maviled, mavi_random);       // Mavi LED'e rastgele parlaklık uygula
+}
