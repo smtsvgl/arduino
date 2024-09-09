@@ -1,0 +1,32 @@
+int lm35Pin = A6;        // LM35 sıcaklık sensörünün bağlı olduğu analog pin
+int led = 4;            // LED'in bağlı olduğu dijital pin
+#define buzzer 2        // Buzzer'ın bağlı olduğu dijital pin
+int zaman = 50;         // LED ve buzzer'ın yanıp sönme süresi (milisaniye cinsinden)
+int okunan_deger = 0;   // Sensörden okunan ham değer
+float sicaklik_gerilim = 0; // Gerilim değeri (mV cinsinden)
+float sicaklik = 0;     // Hesaplanan sıcaklık değeri (°C cinsinden)
+
+void setup() {
+  pinMode(led, OUTPUT);        // LED pinini çıkış olarak ayarla
+  pinMode(buzzer, OUTPUT);     // Buzzer pinini çıkış olarak ayarla
+  Serial.begin(9600);          // Seri portu 9600 baud hızında başlat
+}
+
+void loop() {
+  okunan_deger = analogRead(lm35Pin);  // LM35 sensöründen ham değeri oku
+  sicaklik_gerilim = (okunan_deger / 1023.0) * 5000; // Ham değeri gerilim değerine dönüştür
+  sicaklik = sicaklik_gerilim / 10.0;    // Gerilim değerini sıcaklık değerine dönüştür
+  Serial.println(sicaklik);            // Sıcaklık değerini seri monitöre yazdır
+
+  if (sicaklik >= 30) {               // Sıcaklık 30°C veya daha yüksekse
+    digitalWrite(led, HIGH);         // LED'i yak
+    digitalWrite(buzzer, HIGH);      // Buzzer'ı çal
+    delay(zaman);                    // Zaman kadar bekle
+    digitalWrite(led, LOW);          // LED'i söndür
+    digitalWrite(buzzer, LOW);       // Buzzer'ı kapat
+    delay(zaman);                    // Zaman kadar bekle
+  } else {
+    digitalWrite(led, LOW);          // Sıcaklık 30°C'nin altında ise LED ve buzzer'ı kapat
+    digitalWrite(buzzer, LOW);
+  }
+}
