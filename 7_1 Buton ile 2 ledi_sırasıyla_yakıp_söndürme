@@ -1,0 +1,26 @@
+int led1 = 2;      // LED 1 için pin 2 atanır
+int led2 = 4;      // LED 2 için pin 4 atanır
+int buton = 9;     // Buton için pin 9 atanır
+int buton_durum;   // Butonun durumunu saklamak için değişken
+int buton_durum1;  // Bu değişken kullanılmıyor, kodda gereksiz
+
+void setup() {
+  pinMode(led1, OUTPUT);  // LED 1 pinini çıkış olarak ayarla
+  pinMode(led2, OUTPUT);  // LED 2 pinini çıkış olarak ayarla
+  pinMode(buton, INPUT);  // Buton pinini giriş olarak ayarla
+}
+
+void loop() {
+  buton_durum = digitalRead(buton);  // Butonun durumunu oku
+
+  /* Butona basılmışsa LED 1'i yak, LED 2'i söndür */
+  if (buton_durum == 1) {
+    digitalWrite(led1, HIGH);  // LED 1'i yak
+    digitalWrite(led2, LOW);   // LED 2'i söndür
+  }
+  /* Butona basılmamışsa LED 1'i söndür, LED 2'i yak */
+  else {
+    digitalWrite(led1, LOW);   // LED 1'i söndür
+    digitalWrite(led2, HIGH);  // LED 2'i yak
+  }
+}
