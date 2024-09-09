@@ -1,0 +1,22 @@
+int pirPin = 10; // PIR sensörünün bağlı olduğu pin
+int ledPin = 4; // LED'in bağlı olduğu pin
+
+int hareket; // PIR sensöründen okunan hareket verisi
+
+void setup() {
+  pinMode(pirPin, INPUT);  // PIR sensör pinini giriş olarak ayarla
+  pinMode(ledPin, OUTPUT); // LED pinini çıkış olarak ayarla
+}
+
+void loop() {
+  hareket = digitalRead(pirPin); // PIR sensöründen hareket verisini oku
+
+  if(hareket == 1) {  // Eğer hareket algılanırsa
+    digitalWrite(ledPin, HIGH); // LED'i yak
+  }
+  else {  // Eğer hareket algılanmazsa
+    digitalWrite(ledPin, LOW);  // LED'i söndür
+  }
+
+  delay(100); // 100 milisaniye bekle
+}
