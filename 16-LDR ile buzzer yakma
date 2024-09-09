@@ -1,0 +1,25 @@
+int buzzer_pin = 2;  // Buzzer'ın bağlı olduğu pin
+int ldr_pin = A6;    // LDR'nin bağlı olduğu analog pin
+int ses_degeri;      // LDR'den okunan ışık değeri
+
+void setup()
+{
+  pinMode(buzzer_pin, OUTPUT);  // Buzzer pinini çıkış olarak ayarla
+  pinMode(ldr_pin, INPUT);       // LDR pinini giriş olarak ayarla
+}
+
+void loop()
+{
+  ses_degeri = analogRead(ldr_pin);  // LDR'den okunan değeri oku
+  
+  if (ses_degeri < 200)  // Eğer LDR değeri 200'den küçükse
+  {
+    digitalWrite(buzzer_pin, HIGH);  // Buzzer'ı aç
+  }
+  else
+  {
+    digitalWrite(buzzer_pin, LOW);   // Buzzer'ı kapalı tut
+  }
+
+  delay(100);  // 100 ms bekle
+}
