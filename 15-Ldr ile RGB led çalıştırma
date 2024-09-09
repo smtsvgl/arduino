@@ -1,0 +1,44 @@
+int ldr = A6;         // LDR'nin bağlı olduğu analog pin
+int kirmizi = 3;     // Kırmızı LED'in bağlı olduğu pin
+int yesil = 5;       // Yeşil LED'in bağlı olduğu pin
+int mavi = 6;        // Mavi LED'in bağlı olduğu pin
+int ldrdurum;        // LDR'den okunan ışık değeri
+
+void setup() {
+  pinMode(kirmizi, OUTPUT);  // Kırmızı LED pinini çıkış olarak ayarla
+  pinMode(yesil, OUTPUT);    // Yeşil LED pinini çıkış olarak ayarla
+  pinMode(mavi, OUTPUT);     // Mavi LED pinini çıkış olarak ayarla
+  pinMode(ldr, INPUT);       // LDR pinini giriş olarak ayarla
+}
+
+void loop() {
+  ldrdurum = analogRead(ldr);  // LDR'den okunan değeri oku
+
+  // LDR değeri 100'den küçükse sadece kırmızı LED'i yak
+  if (ldrdurum < 100) {
+    analogWrite(kirmizi, 255);  // Kırmızı LED'i maksimum parlaklıkta yak
+    analogWrite(yesil, 0);      // Yeşil LED'i kapalı tut
+    analogWrite(mavi, 0);       // Mavi LED'i kapalı tut
+  }
+
+  // LDR değeri 100 ile 300 arasında ise sadece yeşil LED'i yak
+  else if (ldrdurum >= 100 && ldrdurum < 300) {
+    analogWrite(kirmizi, 0);    // Kırmızı LED'i kapalı tut
+    analogWrite(yesil, 255);    // Yeşil LED'i maksimum parlaklıkta yak
+    analogWrite(mavi, 0);       // Mavi LED'i kapalı tut
+  }
+
+  // LDR değeri 300 ile 700 arasında ise sadece mavi LED'i yak
+  else if (ldrdurum >= 300 && ldrdurum < 700) {
+    analogWrite(kirmizi, 0);    // Kırmızı LED'i kapalı tut
+    analogWrite(yesil, 0);      // Yeşil LED'i kapalı tut
+    analogWrite(mavi, 255);     // Mavi LED'i maksimum parlaklıkta yak
+  }
+
+  // LDR değeri 700'den büyükse tüm LED'leri kapalı tut
+  else if (ldrdurum >= 700) {
+    analogWrite(kirmizi, 0);    // Kırmızı LED'i kapalı tut
+    analogWrite(yesil, 0);      // Yeşil LED'i kapalı tut
+    analogWrite(mavi, 0);       // Mavi LED'i kapalı tut
+  }
+}
