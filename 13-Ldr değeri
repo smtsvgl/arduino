@@ -1,0 +1,12 @@
+int okunandeger;  // Okunan değeri saklamak için değişken
+int ldr = A6;     // LDR'nin bağlı olduğu analog pin
+
+void setup() {
+  Serial.begin(9600);  // Seri haberleşmeyi başlat
+}
+
+void loop() {
+  okunandeger = analogRead(ldr);  // LDR'den okunan değeri oku
+  Serial.println(okunandeger);    // Okunan değeri seri port üzerinden yazdır
+  delay(20);                      // 20 milisaniye bekle
+}
