@@ -1,0 +1,49 @@
+#define echoPin A3        // Echo pini
+#define trigPin A2        // Trig pini
+#define buzzerPin 2       // Buzzer pini
+
+int maximum_menzil = 50;  // Maksimum mesafe (cm)
+int minimum_menzil = 0;   // Minimum mesafe (cm)
+
+void setup() {
+  pinMode(trigPin, OUTPUT);   // Trig pinini çıkış olarak ayarla
+  pinMode(echoPin, INPUT);    // Echo pinini giriş olarak ayarla
+  pinMode(buzzerPin, OUTPUT); // Buzzer pinini çıkış olarak ayarla
+}
+
+void loop() {
+  int olcum = mesafe(maximum_menzil, minimum_menzil);  // Mesafeyi ölç
+  melodi(olcum * 10);                                  // Ölçülen mesafeye göre melodi çalar
+}
+
+int mesafe(int max_menzil, int min_menzil) {
+  long sure;  // Pulse süresi
+  float mesafe; // Ölçülen mesafe
+
+  // Trig pinine kısa bir darbe gönder
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Echo pininden gelen sinyal süresini ölç
+  sure = pulseIn(echoPin, HIGH);
+  
+  // Mesafeyi hesapla (cm cinsinden)
+  mesafe = sure / 58.2;
+  delay(50);
+
+  // Mesafe sınırları kontrolü
+  if (mesafe >= max_menzil || mesafe <= min_menzil) {
+    return 0;  // Mesafe sınırların dışındaysa 0 döndür
+  }
+  return mesafe; // Geçerli mesafeyi döndür
+}
+
+void melodi(int dly) {
+  tone(buzzerPin, 440);   // Buzzer'ı 440 Hz frekansta çal
+  delay(dly);             // Belirtilen süre boyunca çal
+  noTone(buzzerPin);     // Buzzer'ı kapat
+  delay(dly);            // Belirtilen süre boyunca bekle
+}
