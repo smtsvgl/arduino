@@ -1,0 +1,27 @@
+int led_pin = 4;     // LED'in bağlı olduğu pin
+int ldr_pin = A6;    // LDR'nin bağlı olduğu analog pin
+int isik_degeri;     // LDR'den okunan ışık değeri
+
+void setup()
+{
+  pinMode(led_pin, OUTPUT);  // LED pinini çıkış olarak ayarla
+  pinMode(ldr_pin, INPUT);   // LDR pinini giriş olarak ayarla
+}
+ 
+void loop()
+{
+  isik_degeri = analogRead(ldr_pin);  // LDR'den okunan değeri oku
+  
+  // Eğer ışık değeri 200'den küçükse LED'i aç
+  if(isik_degeri < 200)
+  {
+    digitalWrite(led_pin, HIGH);
+  }
+  // Aksi halde LED'i kapalı tut
+  else
+  {
+    digitalWrite(led_pin, LOW);
+  }
+
+  delay(100);  // 100 milisaniye bekle
+}
