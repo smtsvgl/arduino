@@ -1,0 +1,42 @@
+int buton = 9;        // Buton için pin 9 atanır
+int led = 2;          // LED için pin 2 atanır
+int buton_durum;      // Butonun durumunu saklamak için değişken
+int kalicibuton = 0;  // Butonun kalıcı durumunu saklamak için değişken
+
+void setup() {
+  pinMode(buton, INPUT);   // Buton pinini giriş olarak ayarla
+  pinMode(led, OUTPUT);    // LED pinini çıkış olarak ayarla
+}
+
+void loop() {
+  buton_durum = digitalRead(buton);  // Butonun durumunu oku
+
+  if (buton_durum == 1) {  // Eğer butona basılmışsa
+    kalicibuton = !kalicibuton;  // Kalıcı buton durumunu değiştir (toggle)
+    delay(200);  // Debouncing için kısa bir gecikme ekle
+  }
+
+  // Kalıcı buton durumu 1 ise LED'i yak, 0 ise söndür
+  if (kalicibuton == 1) {
+    digitalWrite(led, HIGH);  // LED'i yak
+  } else {
+    digitalWrite(led, LOW);   // LED'i söndür
+  }
+}
+
+
+
+
+
+
+
+Açıklama Kodda kullanılan `!` operatörü, **"ünlem etkisi"** olarak bilinen bir mantıksal operatördür. Bu operatör, bir boolean (doğru/yanlış) değeri tersine çevirir. Yani, `true` değerini `false`'a, `false` değerini ise `true`'ya dönüştürür.
+
+Kodunuzda `!kalicibuton` ifadesi kullanılarak `kalicibuton` değişkeninin değeri tersine çevrilir. Bu, `kalicibuton` değişkeni `0` (false) ise `1` (true) olur ve tam tersi de geçerlidir. Yani, `kalicibuton` değişkeninin mevcut durumunun tersini alır.
+
+Örneğin:
+
+- Eğer `kalicibuton` değişkeni `0` ise, `!kalicibuton` ifadesi `1` (true) olur.
+- Eğer `kalicibuton` değişkeni `1` ise, `!kalicibuton` ifadesi `0` (false) olur.
+
+Bu, butona her basıldığında `kalicibuton` değişkeninin değerini `0` ve `1` arasında geçiş yaparak LED'in durumunu değiştirmeye yarar.
