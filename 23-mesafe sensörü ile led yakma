@@ -1,0 +1,40 @@
+#define echopinimiz A1     // Echo pini
+#define trigpinimiz A0     // Trig pini
+#define led 4             // LED pini
+
+int mesafe = 0;          // Ölçülen mesafe
+int sure = 0;            // Pulse süresi
+
+void setup() {
+  pinMode(trigpinimiz, OUTPUT);  // Trig pinini çıkış olarak ayarla
+  pinMode(echopinimiz, INPUT);   // Echo pinini giriş olarak ayarla
+  pinMode(led, OUTPUT);          // LED pinini çıkış olarak ayarla
+  Serial.begin(9600);            // Seri haberleşmeyi başlat
+}
+
+void loop() {
+  // Trig pinine kısa bir darbe gönder
+  digitalWrite(trigpinimiz, HIGH);
+  delayMicroseconds(10);          // 10 mikrosaniye bekle
+  digitalWrite(trigpinimiz, LOW);
+  
+  // Echo pininden gelen sinyal süresini ölç
+  sure = pulseIn(echopinimiz, HIGH);
+  
+  // Mesafeyi hesapla (cm cinsinden)
+  mesafe = (sure / 2) / 29.1;
+  
+  // Sonucu seri monitöre yazdır
+  Serial.print("Mesafe: ");
+  Serial.print(mesafe);
+  Serial.println(" cm");
+
+  // Mesafeye göre LED'i aç veya kapat
+  if (mesafe < 35) {
+    digitalWrite(led, HIGH);  // LED'i yak
+  } else {
+    digitalWrite(led, LOW);   // LED'i söndür
+  }
+
+  delay(250);  // 250 ms bekle
+}
