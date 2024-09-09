@@ -1,0 +1,12 @@
+int led1 = 4;  // led1 adında bir değişken tanımlanır ve dijital pin 4 atanır
+
+void setup() {
+  pinMode(led1, OUTPUT);  // led1 pinini çıkış pini olarak ayarla
+}
+
+void loop() {
+  digitalWrite(led1, HIGH);  // led1 pinini HIGH yaparak LED'i yak
+  delay(1000);  // 1 saniye bekle
+  digitalWrite(led1, LOW);  // led1 pinini LOW yaparak LED'i söndür
+  delay(1000);  // 1 saniye bekle
+}
