@@ -1,0 +1,37 @@
+// HCSR04 Ultrasonik Mesafe Sensörü
+// Trig pini A0, Echo pini A1 olarak bağlı
+
+const int trigPin = A0;  // Trig pini bağlantısı
+const int echoPin = A1;  // Echo pini bağlantısı
+
+void setup() {
+  pinMode(trigPin, OUTPUT);  // Trig pinini çıkış olarak ayarla
+  pinMode(echoPin, INPUT);   // Echo pinini giriş olarak ayarla
+  Serial.begin(9600);        // Seri haberleşmeyi başlat
+}
+
+void loop() {
+  long sure = mesafeOlculmesi();  // Mesafe ölçümünü yap
+
+  // Mesafeyi hesapla (cm cinsinden)
+  float mesafe = sure * 0.034 / 2;
+
+  // Sonucu seri porta yazdır
+  Serial.print("Mesafe: ");
+  Serial.print(mesafe);
+  Serial.println(" cm");
+
+  delay(1000);  // 1 saniye bekle
+}
+
+// Mesafe ölçümünü yapan fonksiyon
+long mesafeOlculmesi() {
+  digitalWrite(trigPin, HIGH);  // Trig pinini yüksek yap
+  delayMicroseconds(10);        // 10 mikrosaniye bekle
+  digitalWrite(trigPin, LOW);   // Trig pinini düşük yap
+
+  // Echo pininden gelen sinyal süresini ölç
+  long sure = pulseIn(echoPin, HIGH);
+
+  return sure;  // Sinyal süresini döndür
+}
