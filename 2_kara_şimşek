@@ -1,0 +1,17 @@
+int led1 = 2;  // led1 adında bir değişken tanımlanır ve dijital pin 2 atanır
+int led2 = 4;  // led2 adında bir değişken tanımlanır ve dijital pin 4 atanır
+
+void setup() {
+  pinMode(led1, OUTPUT);  // led1 pinini çıkış pini olarak ayarla
+  pinMode(led2, OUTPUT);  // led2 pinini çıkış pini olarak ayarla
+}
+
+void loop() {
+  digitalWrite(led1, HIGH);  // led1 pinini HIGH yaparak LED'i yak
+  delay(100);  // 100 milisaniye bekle
+  digitalWrite(led1, LOW);  // led1 pinini LOW yaparak LED'i söndür
+  digitalWrite(led2, HIGH);  // led2 pinini HIGH yaparak LED'i yak
+  delay(100);  // 100 milisaniye bekle
+  digitalWrite(led2, LOW);  // led2 pinini LOW yaparak LED'i söndür
+  delay(100);  // 100 milisaniye bekle
+}
