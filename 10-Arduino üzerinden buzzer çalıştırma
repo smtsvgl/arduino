@@ -1,0 +1,15 @@
+int buzzerPin = 2;  // Buzzer için pin 2 atanır
+
+void setup() {
+  pinMode(buzzerPin, OUTPUT);  // Buzzer pinini çıkış olarak ayarla
+}
+
+void loop() {
+  /* Buzzer'ı aç (HIGH), 1 saniye bekle */
+  digitalWrite(buzzerPin, HIGH);  // Buzzer'ı aç
+  delay(1000);  // 1000 milisaniye (1 saniye) bekle
+
+  /* Buzzer'ı kapat (LOW), 1 saniye bekle */
+  digitalWrite(buzzerPin, LOW);   // Buzzer'ı kapat
+  delay(1000);  // 1000 milisaniye (1 saniye) bekle
+}
