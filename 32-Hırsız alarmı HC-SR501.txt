@@ -1,0 +1,22 @@
+int pirPin = 10;  // PIR sensörünün bağlı olduğu pin
+int buzzerPin = 2; // Buzzer'ın bağlı olduğu pin
+
+int hareket;  // PIR sensöründen okunan hareket verisi
+
+void setup() {
+  pinMode(pirPin, INPUT);  // PIR sensör pinini giriş olarak ayarla
+  pinMode(buzzerPin, OUTPUT); // Buzzer pinini çıkış olarak ayarla
+}
+
+void loop() {
+  hareket = digitalRead(pirPin); // PIR sensöründen hareket verisini oku
+
+  if(hareket == 1) {  // Eğer hareket algılanırsa
+    digitalWrite(buzzerPin, HIGH); // Buzzer'ı aç
+  }
+  else {  // Eğer hareket algılanmazsa
+    digitalWrite(buzzerPin, LOW);  // Buzzer'ı kapat
+  }
+
+  delay(100); // 100 milisaniye bekle
+}

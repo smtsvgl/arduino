@@ -1,0 +1,18 @@
+int led = 4;   // LED'in bağlı olduğu pin
+int mz80 = 10; // Sensörün bağlı olduğu pin
+
+void setup() {
+  pinMode(led, OUTPUT);   // LED pinini çıkış olarak ayarla
+  pinMode(mz80, INPUT);   // Sensör pinini giriş olarak ayarla
+}
+
+void loop() {
+  int deger = digitalRead(mz80); // Sensörden değeri oku
+
+  // Sensör değeri 0 ise LED'i yak, aksi takdirde LED'i söndür
+  if (deger == 0) {
+    digitalWrite(led, HIGH); // LED'i yak
+  } else {
+    digitalWrite(led, LOW);  // LED'i söndür
+  }
+}

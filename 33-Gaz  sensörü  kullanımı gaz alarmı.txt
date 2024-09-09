@@ -1,0 +1,28 @@
+const int buzzerPin = 2; // Buzzer'ın bağlı olduğu pin
+const int gazPin = 10;    // Gaz sensörünün dijital çıkış pini (A0 yerine dijital pin kullanıldı)
+
+void setup()
+{
+  pinMode(buzzerPin, OUTPUT); // Buzzer pini çıkış olarak ayarlandı
+  pinMode(gazPin, INPUT);     // Gaz sensörünün dijital pini giriş olarak ayarlandı
+  Serial.begin(9600);         // Seri haberleşme başlatıldı
+}
+
+void loop()
+{
+  int gazDurumu = digitalRead(gazPin); // Gaz sensöründen dijital değer okunuyor
+
+  Serial.print("Gaz Durumu: ");        // Seri monitöre gaz durumu yazdırılıyor
+  Serial.println(gazDurumu);
+
+  if(gazDurumu == HIGH) // Gaz sensörü yüksek sinyal gönderiyorsa
+  {
+    digitalWrite(buzzerPin, HIGH); // Buzzer çalıyor
+  }
+  else
+  {
+    digitalWrite(buzzerPin, LOW);  // Gaz durumu düşükse buzzer kapalı kalıyor
+  }
+
+  delay(100); // Döngüler arasında 100 ms bekleme
+}

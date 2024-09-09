@@ -1,0 +1,12 @@
+const int lazerPin = 10; // Lazer modülünün bağlı olduğu pin
+
+void setup() {
+  pinMode(lazerPin, OUTPUT); // Lazer pinini çıkış olarak ayarla
+}
+
+void loop() {
+  digitalWrite(lazerPin, HIGH); // Lazer açık
+  delay(1000); // 1 saniye bekle
+  digitalWrite(lazerPin, LOW); // Lazer kapalı
+  delay(1000); // 1 saniye bekle
+}

@@ -1,0 +1,18 @@
+const int sesPin = 10; // Ses sensörünün dijital pini
+const int ledPin = 4; // LED'in bağlı olduğu dijital pin
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // LED pinini çıkış olarak ayarla
+  pinMode(sesPin, INPUT); // Ses sensörü pinini giriş olarak ayarla
+}
+
+void loop() {
+  int sesSeviyesi = analogRead(sesPin); // Ses sensöründen gelen değeri oku
+
+  // Eğer ses seviyesi belirli bir eşik değerinden (örneğin 500) yüksekse, LED'i yak
+  if (sesSeviyesi > 500) {
+    digitalWrite(ledPin, HIGH); // LED'i yak
+  } else {
+    digitalWrite(ledPin, LOW); // LED'i söndür
+  }
+}

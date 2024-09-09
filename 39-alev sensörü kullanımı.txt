@@ -1,0 +1,25 @@
+int alevPin = 10;     // Alev sensörünün bağlı olduğu dijital pin numarası
+int buzzerpin = 2;   // Buzzer'ın bağlı olduğu dijital pin numarası
+int durum;           // Alev sensöründen okunan durum değeri
+
+void setup()
+{
+  pinMode(alevPin, INPUT);   // Alev sensör pin'ini giriş olarak ayarla
+  pinMode(buzzerpin, OUTPUT); // Buzzer pin'ini çıkış olarak ayarla
+}
+
+void loop()
+{
+  durum = digitalRead(alevPin);  // Alev sensöründen dijital değeri oku
+
+  if (durum == 0)  // Alev algılandığında (durum 0 ise)
+  {
+    digitalWrite(buzzerpin, HIGH);  // Buzzer'ı aç (çaldır)
+  }
+  else  // Alev algılanmadığında (durum 1 ise)
+  {
+    digitalWrite(buzzerpin, LOW);   // Buzzer'ı kapat
+  }
+
+  delay(100);  // Her döngü arasında 100 milisaniye bekle
+}

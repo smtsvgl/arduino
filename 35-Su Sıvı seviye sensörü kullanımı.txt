@@ -1,0 +1,29 @@
+#define sensörPin 10         // Sıvı sensörünün bağlı olduğu dijital pin
+#define ledPin 4          // Su seviyesinin belirli bir seviyenin altına düştüğünde LED'in yanacağı pin
+#define eşikDeğeri 1        // Dijital sensörler için eşik değeri genellikle 1 veya 0 olur
+
+int suSeviyesi = 0;        // Su seviyesini saklamak için değişken
+
+void setup() {
+  pinMode(sensörPin, INPUT);  // Sensör pin'ini giriş olarak ayarla
+  pinMode(ledPin, OUTPUT);    // LED pin'ini çıkış olarak ayarla
+  Serial.begin(9600);        // Seri port iletişimini başlat
+}
+
+void loop() {
+  // Sensörden dijital değer oku
+  suSeviyesi = digitalRead(sensörPin);
+
+  // Su seviyesini seri monitöre yazdır
+  Serial.print("Su Durumu: ");
+  Serial.println(suSeviyesi == HIGH ? "Su Var" : "Su Yok");
+
+  // Su seviyesini eşik değeri ile karşılaştır
+  if (suSeviyesi == LOW) {
+    digitalWrite(ledPin, HIGH);  // Su varsa LED'i yak
+  } else {
+    digitalWrite(ledPin, LOW);   // Su yoksa LED'i söndür
+  }
+
+  delay(1000);  // Her döngü arasında 1 saniye bekle
+}

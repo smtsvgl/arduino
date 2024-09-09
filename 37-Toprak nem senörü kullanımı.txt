@@ -1,0 +1,46 @@
+// Nem sensörünün bağlı olduğu dijital pin
+int nemPin = 10; // Sensör D10 pinine bağlı
+
+// LED'in bağlı olduğu pin
+int ledPin = 4; // LED D4 pinine bağlı
+
+// Nem sensöründen okunan değeri saklayacağımız değişken
+int nemdegeri;
+
+// Nem değeri için eşik değeri (LED'in yanıp yanmayacağını belirler)
+int nemEsikdegeri = 800; // Eğer okunan nem değeri bu değerden küçükse LED yanar
+
+void setup()
+{
+  // Pin modlarını ayarlıyoruz
+  pinMode(nemPin, INPUT);  // Nem sensörü pini giriş olarak ayarlanır
+  pinMode(ledPin, OUTPUT); // LED pini çıkış olarak ayarlanır
+
+  // Seri haberleşmeyi başlatıyoruz (9600 baud hızında)
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  // Nem sensöründen veri okuyoruz
+  nemdegeri = analogRead(nemPin);
+
+  // Okunan nem değerini seri monitöre yazdırıyoruz
+  Serial.print("Nem Değeri: ");
+  Serial.println(nemdegeri);
+
+  // Nem değerini eşik değeri ile karşılaştırıyoruz
+  if(nemdegeri < nemEsikdegeri)
+  {
+    // Eğer nem değeri eşik değerinden küçükse LED'i yak
+    digitalWrite(ledPin, HIGH);
+  }
+  else
+  {
+    // Eğer nem değeri eşik değerinden büyükse LED'i söndür
+    digitalWrite(ledPin, LOW);
+  }
+
+  // Döngü arasında kısa bir gecikme
+  delay(100);
+}

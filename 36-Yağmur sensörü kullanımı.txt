@@ -1,0 +1,46 @@
+// Yağmur sensörünün bağlı olduğu dijital pin
+int yagmurPin = 10; // Sensör D10 pinine bağlı
+
+// LED'in bağlı olduğu pin
+int ledPin = 4; // LED D4 pinine bağlı
+
+// Yağmur sensöründen okunan değeri saklayacağımız değişken
+int yagmurdegeri;
+
+// Yağmur değeri için eşik değeri (LED'in yanıp yanmayacağını belirler)
+int yagmurEsikdegeri = 800; // Eğer okunan yağmur değeri bu değerden küçükse LED yanar
+
+void setup()
+{
+  // Pin modlarını ayarlıyoruz
+  pinMode(yagmurPin, INPUT);  // Yağmur sensörü pini giriş olarak ayarlanır
+  pinMode(ledPin, OUTPUT); // LED pini çıkış olarak ayarlanır
+
+  // Seri haberleşmeyi başlatıyoruz (9600 baud hızında)
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  // Yağmur sensöründen veri okuyoruz
+  yagmurdegeri = analogRead(yagmurPin);
+
+  // Okunan yağmur değerini seri monitöre yazdırıyoruz
+  Serial.print("Yağmur Değeri: ");
+  Serial.println(yagmurdegeri);
+
+  // Yağmur değerini eşik değeri ile karşılaştırıyoruz
+  if(yagmurdegeri < yagmurEsikdegeri)
+  {
+    // Eğer yağmur değeri eşik değerinden küçükse LED'i yak
+    digitalWrite(ledPin, HIGH);
+  }
+  else
+  {
+    // Eğer yağmur değeri eşik değerinden büyükse LED'i söndür
+    digitalWrite(ledPin, LOW);
+  }
+
+  // Döngü arasında kısa bir gecikme
+  delay(100);
+}

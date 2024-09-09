@@ -1,0 +1,25 @@
+int LED_Pin = 4;   // LED'in bağlı olduğu dijital pin numarası
+int IR_Pin = 10;   // IR sensörünün bağlı olduğu dijital pin numarası
+int IR_degeri;     // IR sensöründen okunan değer
+
+void setup() {
+  pinMode(LED_Pin, OUTPUT);  // LED pin'ini çıkış olarak ayarla
+  pinMode(IR_Pin, INPUT);    // IR sensör pin'ini giriş olarak ayarla
+  Serial.begin(9600);        // Seri port iletişimini başlat
+}
+
+void loop() {
+  IR_degeri = digitalRead(IR_Pin);  // IR sensöründen dijital değeri oku
+
+  Serial.print("IR Değeri: ");      // IR sensöründen okunan değeri seri monitöre yazdır
+  Serial.println(IR_degeri);
+
+  // IR sensöründen okunan değere göre LED'i aç veya kapat
+  if (IR_degeri == 0) {
+    digitalWrite(LED_Pin, HIGH);  // IR sensörü aktifse (0), LED'i yak
+  } else if (IR_degeri == 1) {
+    digitalWrite(LED_Pin, LOW);   // IR sensörü pasifse (1), LED'i söndür
+  }
+
+  delay(100);  // Her döngü arasında 100 milisaniye bekle
+}

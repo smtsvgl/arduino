@@ -1,0 +1,34 @@
+#include <MPU6050.h>
+#include <Wire.h>
+
+MPU6050 ACC_GYR;  // MPU6050 sensör nesnesi oluşturuluyor
+
+int16_t accx, accy, accz;  // İvmeölçer verilerini saklayacak değişkenler
+int16_t gyrx, gyry, gyrz;  // Jiroskop verilerini saklayacak değişkenler
+
+int degerx;  // X eksenindeki ivmeölçer verisini saklayacak değişken
+int degery;  // Y eksenindeki ivmeölçer verisini saklayacak değişken
+
+void setup()
+{
+  Serial.begin(9600);    // Seri haberleşmeyi başlat, baud rate: 9600
+  ACC_GYR.initialize();  // MPU6050 sensörünü başlat
+}
+
+void loop()
+{
+  // MPU6050'den X, Y, Z ivmeölçer ve jiroskop verilerini oku
+  ACC_GYR.getMotion6(&accx, &accy, &accz, &gyrx, &gyry, &gyrz);
+
+  // X ve Y eksenindeki ivmeölçer verilerini 0-180 aralığına dönüştür
+  degerx = map(accx, -17000, 17000, 0, 180);
+  degery = map(accy, -17000, 17000, 0, 180);
+
+  // Seri monitöre X ve Y eksenindeki değerleri yazdır
+  Serial.print("X:");
+  Serial.print(degerx);
+  Serial.print(" Y:");
+  Serial.println(degery);
+
+  delay(100);  // Her döngü arasında 100 milisaniye bekle
+}

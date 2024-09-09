@@ -1,0 +1,21 @@
+const int touchPin =10;  // Dokunmatik sensörün bağlı olduğu pin
+const int ledPin = 4;    // LED'in bağlı olduğu pin
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int touchValue = digitalRead(touchPin);
+
+  if (touchValue == HIGH) {
+    Serial.println("Dokunmatik sensöre dokunuldu!");
+    digitalWrite(ledPin, HIGH);  // LED'i yak
+  } else {
+    Serial.println("Dokunmatik sensöre dokunulmadı.");
+    digitalWrite(ledPin, LOW);   // LED'i söndür
+  }
+
+  delay(1000);  // 1 saniye bekle
+}

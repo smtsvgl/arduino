@@ -1,0 +1,18 @@
+const int sensorPin = 10; // Sensörün dijital pini (D10)
+const int ledPin = 4;    // LED'in bağlı olduğu pin (D4)
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // LED pinini çıkış olarak ayarla
+  pinMode(sensorPin, INPUT); // Sensör pinini giriş olarak ayarla
+}
+
+void loop() {
+  int sensorValue = digitalRead(sensorPin); // Sensörden okunan dijital değeri al
+
+  // Eğer sensör değeri HIGH (1) ise, LED'i yak
+  if (sensorValue == HIGH) {
+    digitalWrite(ledPin, HIGH); // LED'i yak
+  } else {
+    digitalWrite(ledPin, LOW); // LED'i söndür
+  }
+}

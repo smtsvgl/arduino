@@ -1,0 +1,53 @@
+#include <MQ2.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// LCD ekranı oluşturuyoruz (adres 0x27, 16 karakter ve 2 satır)
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// Sensörün bağlı olduğu dijital pin (D10)
+int digitalInput = 10; 
+
+// LPG, CO ve duman değerlerini saklayacağımız değişkenler
+int lpg, co, smoke;
+
+// MQ2 sensörünü oluşturuyoruz ve dijital pin ile bağlıyoruz
+MQ2 mq2(digitalInput);
+
+void setup() {
+  // Seri haberleşmeyi başlatıyoruz, böylece verileri bilgisayara gönderebiliriz
+  Serial.begin(9600);
+  
+  // LCD ekranı başlatıyoruz ve arka ışığı açıyoruz
+  lcd.begin();
+  lcd.backlight();
+  
+  // MQ2 sensörünü başlatıyoruz
+  mq2.begin();
+}
+
+void loop() {
+  // Sensörden verileri okuyoruz
+  float* values = mq2.read(true);
+  
+  // Sensörden LPG, CO ve duman değerlerini alıyoruz
+  lpg = mq2.readLPG();
+  co = mq2.readCO();
+  smoke = mq2.readSmoke();
+  
+  // LCD ekranın ilk satırına LPG ve CO değerlerini yazdırıyoruz
+  lcd.setCursor(0, 0); // Satır 0, sütun 0'dan başlar
+  lcd.print("LPG:");
+  lcd.print(lpg); // LPG değerini ekrana yazdırıyoruz
+  lcd.print(" CO:");
+  lcd.print(co); // CO değerini ekrana yazdırıyoruz
+  
+  // LCD ekranın ikinci satırına duman değerini yazdırıyoruz
+  lcd.setCursor(0, 1); // Satır 1, sütun 0'dan başlar
+  lcd.print("Duman:");
+  lcd.print(smoke); // Duman değerini ekrana yazdırıyoruz
+  lcd.print(" PPM");
+  
+  // Ekranın güncellenmesi için 1 saniye bekliyoruz
+  delay(1000);
+}
