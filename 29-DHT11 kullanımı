@@ -1,0 +1,33 @@
+#include <DHT.h>  // DHT kütüphanesini dahil et
+
+int dhtPin = 10;    // DHT sensörünün bağlı olduğu dijital pin
+int ledPin = 4;   // LED'in bağlı olduğu dijital pin
+
+DHT dht(dhtPin, DHT11);  // DHT sensörünü DHT11 olarak tanımla
+
+void setup() {
+  dht.begin();          // DHT sensörünü başlat
+  pinMode(ledPin, OUTPUT);  // LED pinini çıkış olarak ayarla
+  Serial.begin(9600);   // Seri haberleşmeyi 9600 baud hızında başlat
+}
+
+void loop() {
+  float nem = dht.readHumidity();     // Nem değerini oku
+  float sicaklik = dht.readTemperature(); // Sıcaklık değerini oku
+
+  Serial.print("Nem: ");
+  Serial.print(nem);
+  Serial.print("% ");
+
+  Serial.print("Sıcaklık: ");
+  Serial.print(sicaklik);
+  Serial.println("*C");
+
+  if (sicaklik > 40) {   // Eğer sıcaklık 40°C'den yüksekse
+    digitalWrite(ledPin, HIGH);  // LED'i yak
+  } else {
+    digitalWrite(ledPin, LOW);   // Aksi takdirde LED'i söndür
+  }
+
+  delay(500);  // 500 milisaniye bekle
+}
