@@ -1,0 +1,36 @@
+const int trigPin = A2;   // Mesafe sensörü trig pini
+const int echoPin = A3;   // Mesafe sensörü echo pini
+const int buzzerPin = 2;  // Buzzer pini
+
+long duration;  // Ses dalgasının geri dönüş süresi
+int distance;   // Ölçülen mesafe
+
+void setup() {
+  pinMode(trigPin, OUTPUT);   // Trig pinini çıkış olarak ayarla
+  pinMode(echoPin, INPUT);    // Echo pinini giriş olarak ayarla
+  pinMode(buzzerPin, OUTPUT); // Buzzer pinini çıkış olarak ayarla
+  Serial.begin(9600);         // Seri haberleşmeyi başlat
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW);          // Trig pinini düşük yap
+  delayMicroseconds(2);                // 2 mikrosaniye bekle
+  
+  digitalWrite(trigPin, HIGH);         // Trig pinini yüksek yap
+  delayMicroseconds(10);               // 10 mikrosaniye bekle
+  digitalWrite(trigPin, LOW);          // Trig pinini düşük yap
+  
+  duration = pulseIn(echoPin, HIGH);   // Echo pininden gelen sinyal süresini oku
+  distance = duration * 0.034 / 2;     // Mesafeyi hesapla (cm cinsinden)
+
+  Serial.print("Distance: ");          // Seri monitöre "Distance: " yaz
+  Serial.println(distance);            // Ölçülen mesafeyi yazdır
+
+  if (distance < 30) {                 // Eğer mesafe 30 cm'den küçükse
+    digitalWrite(buzzerPin, HIGH);    // Buzzer'ı aç
+    delay(500);                       // 0.5 saniye bekle
+    digitalWrite(buzzerPin, LOW);     // Buzzer'ı kapat
+  }
+
+  delay(100);  // Bir sonraki mesafe ölçümü öncesinde 0.1 saniye bekle
+}
