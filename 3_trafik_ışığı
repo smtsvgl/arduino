@@ -1,0 +1,35 @@
+const int kirmiziPin = 3;  // Kırmızı ışık için pin 3 kullanılıyor
+const int sariPin = 6;     // Sarı ışık için pin 6 kullanılıyor
+const int yesilPin = 5;    // Yeşil ışık için pin 5 kullanılıyor
+
+void setup() {
+  pinMode(kirmiziPin, OUTPUT);  // Kırmızı pin çıkış olarak ayarlanıyor
+  pinMode(sariPin, OUTPUT);     // Sarı pin çıkış olarak ayarlanıyor
+  pinMode(yesilPin, OUTPUT);    // Yeşil pin çıkış olarak ayarlanıyor
+}
+
+void loop() {
+  // Trafik ışığını kırmızı yap
+  digitalWrite(kirmiziPin, HIGH); // Kırmızı ışığı yak
+  digitalWrite(sariPin, LOW);     // Sarı ışığı söndür
+  digitalWrite(yesilPin, LOW);    // Yeşil ışığı söndür
+  delay(2000); // 2 saniye bekle
+
+  // Trafik ışığını sarı yap
+  digitalWrite(kirmiziPin, LOW);  // Kırmızı ışığı söndür
+  digitalWrite(sariPin, HIGH);    // Sarı ışığı yak
+  digitalWrite(yesilPin, LOW);    // Yeşil ışığı söndür
+  delay(1000); // 1 saniye bekle
+
+  // Trafik ışığını yeşil yap
+  digitalWrite(kirmiziPin, LOW);  // Kırmızı ışığı söndür
+  digitalWrite(sariPin, LOW);     // Sarı ışığı söndür
+  digitalWrite(yesilPin, HIGH);   // Yeşil ışığı yak
+  delay(2000); // 2 saniye bekle
+
+  // Trafik ışığını tekrar sarı yap
+  digitalWrite(kirmiziPin, LOW);  // Kırmızı ışığı söndür
+  digitalWrite(sariPin, HIGH);    // Sarı ışığı yak
+  digitalWrite(yesilPin, LOW);    // Yeşil ışığı söndür
+  delay(1000); // 1 saniye bekle
+}
